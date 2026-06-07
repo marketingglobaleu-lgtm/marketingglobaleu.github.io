@@ -11,7 +11,8 @@
     --neon-green:#39FF14; --neon-cyan:#00E5FF; --bg-dark:#080C10;
     --bg-card:#0E1520; --bg-card2:#111927; --border:rgba(0,229,255,0.15);
     --text-main:#E8EDF3; --text-dim:#7A8FA6; --correct:#39FF14;
-    --wrong:#E31837; --radius:14px; --transition:0.22s cubic-bezier(.4,0,.2,1);
+    --wrong:#E31837; --wa:#25D366; --amber:#FFB020;
+    --radius:14px; --transition:0.22s cubic-bezier(.4,0,.2,1);
   }
   html { font-size:16px; }
   body { font-family:'Segoe UI','SF Pro Display',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg-dark); color:var(--text-main); min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:0; overflow-x:hidden; position:relative; }
@@ -108,8 +109,12 @@
   .btn-primary:disabled { opacity:0.4; cursor:not-allowed; transform:none; box-shadow:none; }
   .btn-restart { width:100%; padding:17px; border-radius:12px; border:1px solid rgba(0,229,255,0.3); background:rgba(0,229,255,0.05); color:var(--neon-cyan); font-size:15px; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; cursor:pointer; transition:var(--transition); -webkit-tap-highlight-color:transparent; }
   .btn-restart:hover { background:rgba(0,229,255,0.1); border-color:var(--neon-cyan); transform:translateY(-1px); }
-  .btn-visit { width:100%; padding:17px; border-radius:12px; border:none; background:linear-gradient(135deg,var(--dom-red),#b5001a); color:#fff; font-size:15px; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; cursor:pointer; transition:var(--transition); box-shadow:0 4px 20px rgba(227,24,55,0.3); -webkit-tap-highlight-color:transparent; text-decoration:none; display:block; line-height:1; text-align:center; }
-  .btn-visit:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(227,24,55,0.5); }
+  .btn-visit { width:100%; padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); background:transparent; color:var(--text-dim); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; cursor:pointer; transition:var(--transition); -webkit-tap-highlight-color:transparent; text-decoration:none; display:block; line-height:1; text-align:center; }
+  .btn-visit:hover { color:var(--text-main); border-color:rgba(255,255,255,0.2); }
+  /* WhatsApp primary CTA */
+  .btn-whatsapp { width:100%; padding:18px; border-radius:12px; border:none; background:linear-gradient(135deg,#25D366,#1da851); color:#06251a; font-size:16px; font-weight:900; letter-spacing:0.3px; cursor:pointer; transition:var(--transition); box-shadow:0 4px 24px rgba(37,211,102,0.35); -webkit-tap-highlight-color:transparent; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:10px; line-height:1; }
+  .btn-whatsapp:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(37,211,102,0.5); }
+  .btn-whatsapp:active { transform:scale(0.97); }
   #screen-quiz { display:none; width:100%; }
   #screen-quiz.show { display:block; }
   .sep { height:1px; background:linear-gradient(90deg,transparent,var(--border),transparent); margin:4px 0 20px; }
@@ -119,7 +124,6 @@
   .confetti-particle { position:absolute; width:8px; height:8px; border-radius:2px; animation:confettiFall linear forwards; }
   @keyframes confettiFall { 0%{transform:translateY(-20px) rotate(0deg);opacity:1} 100%{transform:translateY(100vh) rotate(720deg);opacity:0} }
 
-  /* ── STEP / FORM / CHIP / REWARD (shared with new screens) ── */
   #screen-community,#screen-segmentation,#screen-bonus,#screen-reward { display:none; flex-direction:column; align-items:flex-start; padding-top:0; width:100%; animation:fadeIn 0.4s ease; }
   #screen-community.show,#screen-segmentation.show,#screen-bonus.show,#screen-reward.show { display:flex; }
   .step-indicator { display:flex; align-items:center; gap:6px; padding:16px 0 20px; width:100%; }
@@ -158,8 +162,11 @@
   .seg-continue-btn.show { display:block; }
   .seg-continue-btn:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,100,145,0.55); }
   .seg-continue-btn:active { transform:scale(0.97); }
-
-  /* ── BONUS CHOICE CARDS ── */
+  /* bonus warning */
+  .bonus-warning { width:100%; display:flex; align-items:flex-start; gap:10px; padding:12px 14px; background:rgba(255,176,32,0.07); border:1px solid rgba(255,176,32,0.25); border-radius:10px; margin-bottom:18px; }
+  .bonus-warning-icon { font-size:16px; flex-shrink:0; margin-top:1px; }
+  .bonus-warning-text { font-size:12px; color:#ffce80; line-height:1.5; }
+  .bonus-warning-text strong { color:var(--amber); }
   .bonus-card { width:100%; display:flex; align-items:center; gap:14px; padding:18px; background:var(--bg-card); border:1px solid rgba(255,255,255,0.08); border-radius:12px; cursor:pointer; transition:var(--transition); margin-bottom:12px; text-align:left; -webkit-tap-highlight-color:transparent; position:relative; overflow:hidden; }
   .bonus-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:linear-gradient(180deg,var(--dom-red),var(--neon-cyan)); opacity:0; transition:var(--transition); }
   .bonus-card:hover { border-color:rgba(0,229,255,0.3); transform:translateY(-1px); }
@@ -171,10 +178,9 @@
   .bonus-card-cond { font-size:11px; color:var(--text-dim); line-height:1.4; }
   .bonus-card-check { width:24px; height:24px; border-radius:50%; border:2px solid rgba(255,255,255,0.15); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:13px; color:transparent; transition:var(--transition); }
   .bonus-card.selected .bonus-card-check { border-color:var(--neon-cyan); background:var(--neon-cyan); color:#000; font-weight:900; }
-
   .reward-unlocked-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; background:rgba(57,255,20,0.1); border:1px solid rgba(57,255,20,0.3); border-radius:99px; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; color:var(--neon-green); margin-bottom:16px; animation:fadeIn 0.5s ease 0.2s both; }
   .reward-unlocked-badge .pulse { width:6px; height:6px; border-radius:50%; background:var(--neon-green); box-shadow:0 0 6px var(--neon-green); animation:blink 1s ease-in-out infinite; }
-  .reward-card { width:100%; background:var(--bg-card); border:1px solid rgba(57,255,20,0.2); border-radius:18px; padding:32px 24px; text-align:center; position:relative; overflow:hidden; margin-bottom:20px; box-shadow:0 0 40px rgba(57,255,20,0.06),0 0 80px rgba(227,24,55,0.04); animation:rewardReveal 0.6s cubic-bezier(.4,0,.2,1) 0.1s both; }
+  .reward-card { width:100%; background:var(--bg-card); border:1px solid rgba(57,255,20,0.2); border-radius:18px; padding:32px 24px; text-align:center; position:relative; overflow:hidden; margin-bottom:16px; box-shadow:0 0 40px rgba(57,255,20,0.06),0 0 80px rgba(227,24,55,0.04); animation:rewardReveal 0.6s cubic-bezier(.4,0,.2,1) 0.1s both; }
   @keyframes rewardReveal { from{opacity:0;transform:scale(0.92) translateY(12px)} to{opacity:1;transform:scale(1) translateY(0)} }
   .reward-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--dom-red),var(--neon-green),var(--neon-cyan)); box-shadow:0 0 12px rgba(57,255,20,0.5); }
   .reward-card::after { content:''; position:absolute; top:-60px; right:-60px; width:180px; height:180px; background:radial-gradient(circle,rgba(57,255,20,0.06),transparent 70%); pointer-events:none; }
@@ -183,7 +189,8 @@
   .reward-card-eyebrow { font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:2px; color:var(--neon-green); margin-bottom:8px; }
   .reward-card-title { font-size:22px; font-weight:900; color:var(--dom-white); margin-bottom:10px; letter-spacing:-0.3px; }
   .reward-card-desc { font-size:14px; color:var(--text-dim); line-height:1.7; max-width:300px; margin:0 auto 16px; }
-  .reward-cond-pill { display:inline-block; font-size:11px; font-weight:700; color:var(--neon-cyan); background:rgba(0,229,255,0.07); border:1px solid rgba(0,229,255,0.2); padding:5px 12px; border-radius:99px; margin-bottom:20px; }
+  .reward-cond-pill { display:inline-block; font-size:11px; font-weight:700; color:var(--neon-cyan); background:rgba(0,229,255,0.07); border:1px solid rgba(0,229,255,0.2); padding:5px 12px; border-radius:99px; margin-bottom:8px; }
+  .reward-expiry { font-size:12px; font-weight:700; color:var(--amber); margin-bottom:18px; }
   .reward-card-divider { height:1px; background:linear-gradient(90deg,transparent,rgba(57,255,20,0.2),transparent); margin:0 -24px 20px; }
   .reward-code-label { font-size:10px; text-transform:uppercase; letter-spacing:1.5px; color:var(--text-dim); margin-bottom:8px; font-weight:700; }
   .reward-claim-code { display:inline-flex; align-items:center; gap:8px; padding:12px 20px; background:rgba(57,255,20,0.06); border:1px dashed rgba(57,255,20,0.35); border-radius:8px; font-size:17px; font-weight:800; color:var(--neon-green); letter-spacing:2px; cursor:pointer; transition:var(--transition); font-family:'Courier New',monospace; }
@@ -194,6 +201,9 @@
   .reward-rank-badge.squad { background:rgba(0,100,145,0.2); color:var(--dom-blue); }
   .reward-rank-badge.tourney { background:rgba(0,229,255,0.1); color:var(--neon-cyan); }
   .reward-rank-badge.champion { background:rgba(57,255,20,0.1); color:var(--neon-green); }
+  .redeem-note { width:100%; display:flex; align-items:flex-start; gap:8px; padding:11px 14px; background:rgba(255,176,32,0.06); border:1px solid rgba(255,176,32,0.2); border-radius:8px; margin-bottom:16px; }
+  .redeem-note-icon { font-size:14px; flex-shrink:0; margin-top:1px; }
+  .redeem-note-text { font-size:11px; color:#ffce80; line-height:1.6; }
   .community-share-box { width:100%; background:linear-gradient(135deg,rgba(88,101,242,0.08),rgba(0,100,145,0.08)); border:1px solid rgba(88,101,242,0.2); border-radius:var(--radius); padding:16px 18px; display:flex; align-items:center; gap:14px; margin-bottom:16px; }
   .community-share-icon { font-size:24px; flex-shrink:0; }
   .community-share-text strong { display:block; font-size:13px; font-weight:800; color:var(--dom-white); margin-bottom:3px; }
@@ -297,13 +307,14 @@
       <div class="form-label">Discord Username <span class="required-badge">Required</span></div>
       <div class="discord-prefix" id="discord-wrap">
         <div class="discord-at">@</div>
-        <input class="form-input" id="input-discord" type="text" placeholder="yourusername" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
+        <input class="form-input" id="input-discord" type="text" placeholder="yourusername" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" maxlength="32">
       </div>
-      <div class="form-error" id="err-discord">Please enter your Discord username to continue.</div>
+      <div class="form-error" id="err-discord">Please enter a valid Discord username (2–32 chars, letters, numbers, . or _).</div>
     </div>
     <div class="form-group">
       <div class="form-label">Email Address <span class="optional-badge">Optional</span></div>
-      <input class="form-input" id="input-email" type="email" placeholder="you@example.com" autocomplete="email">
+      <input class="form-input" id="input-email" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email">
+      <div class="form-error" id="err-email">Please enter a valid email address or leave it empty.</div>
     </div>
     <div class="privacy-note">
       <span class="privacy-note-icon">🔐</span>
@@ -368,6 +379,11 @@
     <h2 class="screen-heading">Choose Your Reward</h2>
     <p class="screen-subheading">Pick one bonus. You'll get a unique code to redeem at Friendly Fire.</p>
 
+    <div class="bonus-warning">
+      <span class="bonus-warning-icon">⚠️</span>
+      <div class="bonus-warning-text">You can select <strong>only one bonus</strong>, and your code can be <strong>used only once</strong>. It's valid for <strong>7 days</strong>. Choose carefully!</div>
+    </div>
+
     <button class="bonus-card" data-bonus="coins" onclick="selectBonus(this,'coins')">
       <div class="bonus-card-icon">🪙</div>
       <div class="bonus-card-body">
@@ -414,6 +430,7 @@
       <div class="reward-card-title" id="reward-title">500 FF Coins</div>
       <div class="reward-card-desc" id="reward-desc"></div>
       <div class="reward-cond-pill" id="reward-cond"></div>
+      <div class="reward-expiry" id="reward-expiry">⏳ Valid until —</div>
       <div class="reward-card-divider"></div>
       <div class="reward-code-label">Your unique code — show it at reception</div>
       <div class="reward-claim-code" id="reward-code" onclick="copyCode()" title="Tap to copy">
@@ -421,24 +438,28 @@
       </div>
       <div class="reward-rank-display">Your rank: <span class="reward-rank-badge" id="reward-rank-badge">–</span></div>
     </div>
-    <div class="community-share-box">
-      <div class="community-share-icon">📸</div>
-      <div class="community-share-text">
-        <strong>Screenshot your code!</strong>
-        <span>Each code works once. Show it at Friendly Fire to claim your bonus. Follow us for events &amp; tournaments.</span>
-      </div>
+
+    <div class="redeem-note">
+      <span class="redeem-note-icon">⚠️</span>
+      <div class="redeem-note-text">This code works <strong>only once</strong> and expires in <strong>7 days</strong>. Book your visit now to lock it in.</div>
     </div>
+
     <div class="action-btns">
+      <a class="btn-whatsapp" id="wa-book" href="#" target="_blank" rel="noopener">
+        <span style="font-size:20px">💬</span> Book Visit &amp; Use Bonus
+      </a>
       <button class="btn-restart" onclick="restartQuiz()">↺ Restart Challenge</button>
-      <a class="btn-visit" href="https://friendlyfire.gg" target="_blank" rel="noopener">🎮 Visit Friendly Fire</a>
+      <a class="btn-visit" href="https://friendlyfire.gg" target="_blank" rel="noopener">Visit Friendly Fire website</a>
     </div>
   </div>
 
 </div><!-- /wrapper -->
 <script>
-/* ═══════════════════════════════════════════════════════════════
-   QUIZ DATA — 5 Esports / Gaming questions
-═══════════════════════════════════════════════════════════════ */
+/* ═══ CONFIG: WhatsApp booking (Lugner City) ═══ */
+const WHATSAPP_NUMBER = '4367762905187';   // FF Lugner — change here if needed
+const BONUS_VALID_DAYS = 7;                 // bonus expiry window
+
+/* ═══ QUIZ DATA — 5 Esports / Gaming questions ═══ */
 const QUESTIONS = [
   { text: 'What does "AFK" mean in gaming?', opts: ['Auto Fast Kill','Away From Keyboard','Aim For Knockout','Active Fire Mode'], correct: 1 },
   { text: 'How many players are usually in a Counter-Strike 2 competitive team?', opts: ['3','4','5','6'], correct: 2 },
@@ -448,7 +469,7 @@ const QUESTIONS = [
 ];
 const LETTERS = ['A','B','C','D'];
 
-/* ── RESULT TIERS: 0-1 Casual | 2-3 Squad | 4 Tournament Ready | 5 Esports Expert ── */
+/* ── RESULT TIERS ── */
 const RANKS = [
   { min:0, max:1, key:'casual',  css:'casual',  label:'Casual Player',    desc:"You're just getting started — and that's perfectly fine. Friendly Fire is the place to level up. See you at the club! 🎮" },
   { min:2, max:3, key:'squad',   css:'squad',   label:'Squad Member',      desc:"You know your way around the scene. Solid foundation — now it's time to grind with the squad." },
@@ -456,52 +477,27 @@ const RANKS = [
   { min:5, max:5, key:'champion',css:'champion',label:'Esports Expert',    desc:"Perfect score. You are the IGL, the strategist, the carry. Friendly Fire is proud to have you in the community. 🏆" }
 ];
 
-/* ── BONUS CONFIG — editable placeholders ──────────────────────────
-   key | icon | title | desc | condition | codePrefix
-   The user picks ONE. A unique code is generated with the prefix.
-─────────────────────────────────────────────────────────────────── */
+/* ── BONUS CONFIG — editable. User picks ONE. ── */
 const BONUSES = {
-  coins: {
-    icon: '🪙',
-    title: '500 FF Coins',
-    desc: 'Get 500 bonus coins added to your FF account.',
-    condition: 'Valid on first top-up of €10 or more',
-    codePrefix: 'C500'
-  },
-  snack: {
-    icon: '🍿',
-    title: 'Free Snack',
-    desc: 'Grab a free snack on the house with your top-up.',
-    condition: 'Valid on a top-up of €10 or more',
-    codePrefix: 'SNACK'
-  },
-  weekday: {
-    icon: '⚡',
-    title: '50% Off — Mon / Tue / Wed',
-    desc: 'Half price on your gaming session at Friendly Fire.',
-    condition: 'Valid Monday, Tuesday or Wednesday',
-    codePrefix: '50OFF'
-  }
+  coins:   { icon:'🪙', title:'500 FF Coins',              desc:'Get 500 bonus coins added to your FF account.',            condition:'Valid on first top-up of €10 or more', codePrefix:'C500'  },
+  snack:   { icon:'🍿', title:'Free Snack',                desc:'Grab a free snack on the house with your top-up.',         condition:'Valid on a top-up of €10 or more',     codePrefix:'SNACK' },
+  weekday: { icon:'⚡', title:'50% Off — Mon / Tue / Wed', desc:'Half price on your gaming session at Friendly Fire.',      condition:'Valid Monday, Tuesday or Wednesday',   codePrefix:'50OFF' }
 };
 
-/* ═══ STATE ═══════════════════════════════════════════════════════ */
+/* ═══ STATE ═══ */
 let current=0, score=0, answered=false;
 let segSelections={game:'',tournament:'',frequency:''}, segCount=0;
 let chosenBonus='';
 
-/* ── PLAYER PROFILE DATA MODEL ────────────────────────────────────
-   Populated through the flow. Maps directly to table columns:
-   timestamp | discord | email | score | tier |
-   game | tournament | frequency | bonus | code | status
-────────────────────────────────────────────────────────────────── */
+/* ── PLAYER PROFILE DATA MODEL → table columns ── */
 let playerProfile = {
   score:0, resultTier:'', discordUsername:'', email:'',
   favoriteGame:'', tournamentInterest:'', playFrequency:'',
   selectedBonus:'', bonusLabel:'', bonusCode:'',
-  status:'issued', timestamp:''
+  status:'issued', timestamp:'', expiresAt:''
 };
 
-/* ═══ SCREEN MANAGEMENT ═══════════════════════════════════════════ */
+/* ═══ SCREEN MANAGEMENT ═══ */
 const ALL_SCREENS=['screen-start','screen-quiz','screen-result','screen-community','screen-segmentation','screen-bonus','screen-reward'];
 function show(id){
   ALL_SCREENS.forEach(s=>{const e=document.getElementById(s);e.style.display='none';e.classList.remove('show');});
@@ -511,10 +507,10 @@ function show(id){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* ═══ QUIZ FLOW ═══════════════════════════════════════════════════ */
+/* ═══ QUIZ FLOW ═══ */
 function startQuiz(){
   current=0;score=0;segSelections={game:'',tournament:'',frequency:''};segCount=0;chosenBonus='';
-  playerProfile={score:0,resultTier:'',discordUsername:'',email:'',favoriteGame:'',tournamentInterest:'',playFrequency:'',selectedBonus:'',bonusLabel:'',bonusCode:'',status:'issued',timestamp:''};
+  playerProfile={score:0,resultTier:'',discordUsername:'',email:'',favoriteGame:'',tournamentInterest:'',playFrequency:'',selectedBonus:'',bonusLabel:'',bonusCode:'',status:'issued',timestamp:'',expiresAt:''};
   show('screen-quiz');renderQuestion();
 }
 function renderQuestion(){
@@ -564,7 +560,7 @@ function nextQuestion(){
   else{document.getElementById('next-btn').className='next-btn';document.getElementById('next-btn').textContent='Next →';renderQuestion();}
 }
 
-/* ═══ RESULT ══════════════════════════════════════════════════════ */
+/* ═══ RESULT ═══ */
 function showResult(){
   document.getElementById('prog-bar').style.width='100%';
   playerProfile.score=score;
@@ -581,19 +577,44 @@ function showResult(){
   if(score===5)spawnConfetti();
 }
 
-/* ═══ COMMUNITY ═══════════════════════════════════════════════════ */
+/* ═══ COMMUNITY + VALIDATION ═══ */
 function showCommunity(){show('screen-community');document.getElementById('input-discord').focus();}
+
+/* Discord: 2–32 chars, letters/numbers/dot/underscore only, no spaces */
+function isValidDiscord(name){ return /^[a-zA-Z0-9._]{2,32}$/.test(name); }
+/* Email: standard format check */
+function isValidEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email); }
+
 function submitCommunity(){
   const dEl=document.getElementById('input-discord'),eEl=document.getElementById('input-email');
-  const errEl=document.getElementById('err-discord'),wrapEl=document.getElementById('discord-wrap');
-  const discord=dEl.value.trim().replace(/^@/,'');
-  if(!discord){wrapEl.classList.add('error');errEl.classList.add('show');dEl.classList.add('error');dEl.focus();return;}
-  wrapEl.classList.remove('error');dEl.classList.remove('error');errEl.classList.remove('show');
-  playerProfile.discordUsername=discord;playerProfile.email=eEl.value.trim();
+  const errD=document.getElementById('err-discord'),wrapEl=document.getElementById('discord-wrap');
+  const errE=document.getElementById('err-email');
+  const discord=dEl.value.trim().replace(/^@+/,'');
+  const email=eEl.value.trim();
+  let ok=true;
+
+  // Discord required + format
+  if(!isValidDiscord(discord)){
+    wrapEl.classList.add('error');dEl.classList.add('error');errD.classList.add('show');ok=false;
+  }else{
+    wrapEl.classList.remove('error');dEl.classList.remove('error');errD.classList.remove('show');
+  }
+
+  // Email optional, but if filled must be valid
+  if(email && !isValidEmail(email)){
+    eEl.classList.add('error');errE.classList.add('show');ok=false;
+  }else{
+    eEl.classList.remove('error');errE.classList.remove('show');
+  }
+
+  if(!ok){ (wrapEl.classList.contains('error')?dEl:eEl).focus(); return; }
+
+  playerProfile.discordUsername=discord;
+  playerProfile.email=email;
   show('screen-segmentation');
 }
 
-/* ═══ SEGMENTATION ════════════════════════════════════════════════ */
+/* ═══ SEGMENTATION ═══ */
 function selectChip(chip,group){
   const allInGroup=chip.closest('.chips-grid').querySelectorAll('.chip');
   const wasSelected=chip.classList.contains('selected');
@@ -615,7 +636,7 @@ function submitSegmentation(){
   show('screen-bonus');
 }
 
-/* ═══ BONUS CHOICE ════════════════════════════════════════════════ */
+/* ═══ BONUS CHOICE ═══ */
 function selectBonus(card,key){
   document.querySelectorAll('.bonus-card').forEach(c=>c.classList.remove('selected'));
   card.classList.add('selected');
@@ -625,20 +646,19 @@ function selectBonus(card,key){
 function confirmBonus(){
   if(!chosenBonus)return;
   const bonus=BONUSES[chosenBonus];
+  const issued=new Date();
+  const expires=new Date(issued.getTime()+BONUS_VALID_DAYS*24*60*60*1000);
   playerProfile.selectedBonus=chosenBonus;
   playerProfile.bonusLabel=bonus.title;
   playerProfile.bonusCode=generateBonusCode(bonus.codePrefix);
   playerProfile.status='issued';
-  playerProfile.timestamp=new Date().toISOString();
-  // ── SAVE TO TABLE (localStorage now / Apps Script later) ──
+  playerProfile.timestamp=issued.toISOString();
+  playerProfile.expiresAt=expires.toISOString();
   sendToBackend(playerProfile);
-  showReward();
+  showReward(expires);
 }
 
-/* ── UNIQUE CODE GENERATOR ─────────────────────────────────────────
-   Format: FF-<PREFIX>-<5 random chars><4 base36 timestamp>
-   Excludes ambiguous chars (0,O,1,I). Random + time = unique.
-─────────────────────────────────────────────────────────────────── */
+/* ── UNIQUE CODE: FF-<PREFIX>-<5 rand><4 base36 time> ── */
 function generateBonusCode(prefix){
   const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let r='';
@@ -646,18 +666,39 @@ function generateBonusCode(prefix){
   const t=Date.now().toString(36).slice(-4).toUpperCase();
   return 'FF-'+prefix+'-'+r+t;
 }
+function formatDate(d){
+  const dd=String(d.getDate()).padStart(2,'0');
+  const mm=String(d.getMonth()+1).padStart(2,'0');
+  return dd+'.'+mm+'.'+d.getFullYear();
+}
 
-/* ═══ REWARD ══════════════════════════════════════════════════════ */
-function showReward(){
+/* ═══ REWARD ═══ */
+function showReward(expires){
   const rank=RANKS.find(r=>playerProfile.resultTier===r.key);
   const bonus=BONUSES[playerProfile.selectedBonus];
+  const expDate=expires||new Date(playerProfile.expiresAt);
+  const expStr=formatDate(expDate);
+
   document.getElementById('reward-name').textContent='@'+playerProfile.discordUsername;
   document.getElementById('reward-icon').textContent=bonus.icon;
   document.getElementById('reward-title').textContent=bonus.title;
   document.getElementById('reward-desc').textContent=bonus.desc;
   document.getElementById('reward-cond').textContent=bonus.condition;
+  document.getElementById('reward-expiry').textContent='⏳ Valid until '+expStr+' ('+BONUS_VALID_DAYS+' days)';
   document.getElementById('reward-code-text').textContent=playerProfile.bonusCode;
   const badge=document.getElementById('reward-rank-badge');badge.textContent=rank.label;badge.className='reward-rank-badge '+rank.css;
+
+  // Build WhatsApp booking link with prefilled message + code
+  const msg =
+    'Hello Friendly Fire! 🎮\n\n' +
+    'I completed the FF Esports Challenge and I would like to book a visit and use my bonus.\n\n' +
+    '🎁 Bonus: ' + bonus.title + '\n' +
+    '🔑 Code: ' + playerProfile.bonusCode + '\n' +
+    '👤 Discord: @' + playerProfile.discordUsername + '\n' +
+    '⏳ Valid until: ' + expStr;
+  const waUrl = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+  document.getElementById('wa-book').href = waUrl;
+
   show('screen-reward');spawnConfetti();
 }
 function copyCode(){
@@ -665,7 +706,7 @@ function copyCode(){
   if(navigator.clipboard){navigator.clipboard.writeText(code).then(()=>{const el=document.getElementById('reward-code');el.style.background='rgba(57,255,20,0.15)';el.style.borderStyle='solid';setTimeout(()=>{el.style.background='';el.style.borderStyle='';},1200);});}
 }
 
-/* ═══ RESTART ═════════════════════════════════════════════════════ */
+/* ═══ RESTART ═══ */
 function restartQuiz(){
   document.getElementById('confetti').innerHTML='';
   ['casual','squad','tourney','champion'].forEach(t=>{document.getElementById('td-'+t).className='tier-dot';});
@@ -675,12 +716,13 @@ function restartQuiz(){
   document.getElementById('bonus-confirm').disabled=true;
   document.getElementById('input-discord').value='';document.getElementById('input-email').value='';
   document.getElementById('discord-wrap').classList.remove('error');document.getElementById('input-discord').classList.remove('error');
-  document.getElementById('err-discord').classList.remove('show');
+  document.getElementById('input-email').classList.remove('error');
+  document.getElementById('err-discord').classList.remove('show');document.getElementById('err-email').classList.remove('show');
   document.getElementById('next-btn').textContent='Next →';
   show('screen-start');
 }
 
-/* ═══ CONFETTI ════════════════════════════════════════════════════ */
+/* ═══ CONFETTI ═══ */
 function spawnConfetti(){
   const wrap=document.getElementById('confetti'),colors=['#E31837','#006491','#39FF14','#00E5FF','#ffffff','#FFD700'];
   wrap.innerHTML='';
@@ -688,35 +730,32 @@ function spawnConfetti(){
   setTimeout(()=>{wrap.innerHTML='';},4000);
 }
 
-/* ═══ HELPERS ═════════════════════════════════════════════════════ */
+/* ═══ HELPERS ═══ */
 function escapeHtml(str){return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;');}
 
 /* ═══════════════════════════════════════════════════════════════
    STORAGE & BACKEND INTEGRATION
-   ───────────────────────────────────────────────────────────────
    Active now: localStorage (key 'ff_quiz_leads')
-   Each record carries a UNIQUE bonusCode and status='issued'.
-   Redemption (mark 'redeemed') is done at reception in the sheet.
+   Each record: UNIQUE bonusCode, status='issued', expiresAt (+7 days).
+   Redemption (set status='redeemed') is done at reception in the sheet.
 
-   Record / table columns:
+   Table columns:
    timestamp | discordUsername | email | score | resultTier |
    favoriteGame | tournamentInterest | playFrequency |
-   selectedBonus | bonusLabel | bonusCode | status
+   selectedBonus | bonusLabel | bonusCode | status | expiresAt
 
-   ── GOOGLE SHEETS INTEGRATION (recommended) ────────────────────
+   GOOGLE SHEETS INTEGRATION (recommended):
    1. Create a Google Sheet with a header row matching the columns.
-   2. Extensions → Apps Script, paste a doPost(e) that appends a row.
+   2. Extensions → Apps Script: doPost(e) appends a row.
    3. Deploy → Web App → "Anyone" → copy the /exec URL.
-   4. Put the URL in SHEET_WEBHOOK_URL below and uncomment the fetch.
-      (no-cors so the POST works from a static page)
+   4. Set SHEET_WEBHOOK_URL below and uncomment the fetch (no-cors).
 
-   const SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/XXXX/exec';
+   const SHEET_WEBHOOK_URL='https://script.google.com/macros/s/XXXX/exec';
    async function sendToGoogleSheets(p){
      await fetch(SHEET_WEBHOOK_URL,{method:'POST',mode:'no-cors',
        headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});
    }
-
-   ── OTHER OPTIONS ──────────────────────────────────────────────
+   OTHER OPTIONS:
    // SUPABASE:  await supabase.from('quiz_leads').insert(p)
    // FIREBASE:  await addDoc(collection(db,'quiz_leads'),p)
    // AIRTABLE:  fetch('https://api.airtable.com/v0/BASE/quiz_leads',{...})
